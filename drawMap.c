@@ -21,7 +21,7 @@ void drawMainMap(MData map[MAP_SIZE][MAP_SIZE]) {   // 1로 초기화된 좌표에 □를 
     SetConsoleTextAttribute(hand, 7);   // 콘솔에서의 글자색을 연한 흰색(7)으로 변경한다.
 }
 
-void drawSubMap(int score, int best, int stage) {   // 서브화면. 맵을 선택하면 해당 맵의 점수 및 도움말을 출력한다.
+void drawSubMap(int score, int best, int stage) {   // 맵을 선택하면 해당 맵의 점수 및 도움말을 출력한다.
     HANDLE hand = GetStdHandle(STD_OUTPUT_HANDLE);  // 표준콘솔출력의 핸들을 반환.
     SetConsoleTextAttribute(hand, 15);  // 콘솔에서의 글자색을 진한 흰색(15)으로 변경한다.
 

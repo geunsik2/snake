@@ -1,6 +1,6 @@
 #include "a.h"
 
-int drawSpeedMenu(int* scoreArr) {  //show stage Menu and score;
+int drawSpeedMenu(int* scoreArr) {  // 맵 선택 메뉴와 점수를 보여준다.
     HANDLE hand = GetStdHandle(STD_OUTPUT_HANDLE);  // 표준콘솔출력의 핸들을 반환.
 
     int i;

@@ -42,6 +42,33 @@
     <ClCompile Include="setFruit.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="setSnake.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="removeSnake.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="rotate.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="collision.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="moveSnakeHead.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="overlap.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="gameOver.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="gameStart.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="queue.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="a.h">

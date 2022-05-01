@@ -29,16 +29,36 @@
 
 typedef int MData;		// 자료형 int를 MData로 정의.
 
-typedef struct _fruitxy {       // typedef로 구조체를 정의
-    int x;                      // _fruitxy의 멤버변수
+typedef struct _fruitxy {   // typedef로 구조체를 정의
+    int x;                  // _fruitxy의 멤버변수
     int y;
     int numOfFruit;
-} FruitPos;                     // _fruitxy의 별칭.
+} FruitPos;                 // _fruitxy의 별칭.
 
-typedef struct _snakexy {       // typedef로 구조체를 정의
-    int x;                      // _snakexy의 멤버변수
+typedef struct _snakexy {   // typedef로 구조체를 정의
+    int x;                  // _snakexy의 멤버변수
     int y;
-} SnakePos;                     // _snakexy의 별칭.
+} SnakePos;                 // _snakexy의 별칭.
+
+
+///////////////////////////QUEUE//////////////////////////////////////////
+typedef struct _mynode {    // typedef로 구조체 _mynode를 정의
+    SnakePos data;  // snake의 멤버변수 x와 y를 가리킴.
+    struct _mynode* next;   // snake의 다음 x와 y를 가리킴.
+} Node;      // _mynode의 별칭.
+
+typedef struct _myqueue {   // typedef로 구조체 _myqueue를 정의 
+    Node* rear;     // Node->data, next ?
+    Node* front;    // Node->next->data, next ?
+} MyQueue;  // _myqueue의 별칭.
+typedef MyQueue Queue;  // MyQueue의 별칭.
+
+void QueueInit(Queue* pq);
+int isEmpty(Queue* pq);
+void Enqueue(Queue* pq, SnakePos data);
+SnakePos Dequeue(Queue* pq);
+SnakePos Peek(Queue* pq);
+///////////////////////////////////////////////////////////////////////////
 
 
 // 함수 원형
@@ -56,18 +76,29 @@ void drawMainMap(MData map[MAP_SIZE][MAP_SIZE]);
 void drawSubMap(int, int, int);
 int setFruit(MData map[MAP_SIZE][MAP_SIZE], FruitPos*);
 int setBonusFruit(MData map[MAP_SIZE][MAP_SIZE], FruitPos*);    // 선언만 하고 호출은 하지 않음.
+void setSnake(MData map[MAP_SIZE][MAP_SIZE], int, int);
+void setSnakeTail(MData map[MAP_SIZE][MAP_SIZE], int, int);
+void removeSnake(MData map[MAP_SIZE][MAP_SIZE], int, int);
+int rotate(int, int);
+int isCollision(int);
+int colWithFruit(SnakePos*, FruitPos*);
+int colWithWall(MData map[MAP_SIZE][MAP_SIZE], SnakePos* sp, int);
+int colWithTail(MData map[MAP_SIZE][MAP_SIZE], SnakePos* sp, int);
+int moveSnakeHead(MData map[MAP_SIZE][MAP_SIZE], SnakePos*, int);
+int overlap(int, int);
+void GameOver(int, int, Queue*, int, int*);
+void GameStart(MData map[MAP_SIZE][MAP_SIZE], int, int*);
 
 
-//구조체 포인터 선언하기
-//struct Person* p1 = malloc(sizeof(struct Person)); // 구조체 포인터 선언, 메모리 할당
-//struct 키워드와 구조체 이름을 사용하여 구조체 포인터를 선언합니다.
-//이때 일반 변수가 아닌 포인터 변수이므로 반드시* 을 붙입니다.
-//그리고 malloc 함수로 메모리를 할당할 때 크기를 알아야 하므로 sizeof(struct Person)과 같이 구조체 크기를 구하여 넣어줍니다.
+// 구조체 포인터 선언하기
+// struct Person* p1 = malloc(sizeof(struct Person)); // 구조체 포인터 선언, 메모리 할당
+// struct 키워드와 구조체 이름을 사용하여 구조체 포인터를 선언한다.
+// 이때 일반 변수가 아닌 포인터 변수이므로 반드시* 을 붙인다.
+// 그리고 malloc 함수로 메모리를 할당할 때 크기를 알아야 하므로 sizeof(struct Person)과 같이 구조체 크기를 구하여 넣어준다.
 
-
-//화살표 사용
-//주의할 점은 구조체 포인터의 멤버에 접근할 때는 -> (화살표 연산자)를 사용해야 한다는 것입니다.
-//구조체 포인터에서.으로 멤버에 접근하고자 한다면
-//p1->age;      // 화살표 연산자로 멤버에 접근
-//(*p1).age;    // 구조체 포인터를 역참조한 뒤 .으로 멤버에 접근
-//위 코드처럼 괄호와 역참조를 사용하면 . (점)으로 멤버에 접근할 수 있습니다.
+// 구조체 포인터의 멤버에 접근하기
+// 구조체 포인터의 멤버에 접근할 때는 -> (화살표 연산자)를 사용해야 한다.
+// 구조체 포인터에서.으로 멤버에 접근하고자 한다면
+// p1->age;      // 화살표 연산자로 멤버에 접근
+// (*p1).age;    // 구조체 포인터를 역참조한 뒤 .으로 멤버에 접근
+// 위 코드처럼 괄호와 역참조를 사용하면 . (점)으로 멤버에 접근할 수 있다.

@@ -139,14 +139,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="collision.c" />
     <ClCompile Include="drawMap.c" />
     <ClCompile Include="drawSpeedMenu.c" />
     <ClCompile Include="drawStartMenu.c" />
+    <ClCompile Include="gameOver.c" />
+    <ClCompile Include="gameStart.c" />
     <ClCompile Include="getKeyDown.c" />
     <ClCompile Include="gotoxy.c" />
     <ClCompile Include="hidecursor.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="moveSnakeHead.c" />
+    <ClCompile Include="overlap.c" />
+    <ClCompile Include="queue.c" />
+    <ClCompile Include="removeSnake.c" />
+    <ClCompile Include="rotate.c" />
     <ClCompile Include="setFruit.c" />
+    <ClCompile Include="setSnake.c" />
     <ClCompile Include="stageInit.c" />
   </ItemGroup>
   <ItemGroup>

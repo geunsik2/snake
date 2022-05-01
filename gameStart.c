@@ -1,16 +1,16 @@
 #include "a.h"
 
-void GameStart(MData map[MAP_SIZE][MAP_SIZE], int stage, int* scoreArr) {
+void GameStart(MData map[MAP_SIZE][MAP_SIZE], int stage, int* scoreArr) {   // 게임 시작 함수.
     int best = scoreArr[stage - 1]; // best에 현재 선택한 맵의 점수를 대입한다.
     int score = 0;  // score 0으로 초기화.
     int key, savedKey = 0;  // key, savedKey 0으로 초기화.
-    Queue queue;    // 구조체 생성. ?
+    Queue queue;    // 구조체 생성.
     QueueInit(&queue);  // rear, front NULL로 초기화.
     SnakePos snake = { MAP_SIZE / 4 - 2, MAP_SIZE / 4 + 1 };    // snake를 (3,6) 좌표에 생성.
-    SnakePos snakeSecond;   // 구조체 생성. ?
-    SnakePos snakeTail; // 구조체 생성. ?
+    SnakePos snakeSecond;   // 구조체 생성.
+    SnakePos snakeTail; // 구조체 생성.
     int time = FALSE;   // time을 0으로 초기화.
-    FruitPos fruit; // 구조체 생성. ?
+    FruitPos fruit; // 구조체 생성.
     fruit.numOfFruit = 0;   // FruitPos의 멤버변수 numOfFruit를 0으로 초기화.
 
     if (stage == 1) {   // 첫 번째 맵 생성.
@@ -31,7 +31,6 @@ void GameStart(MData map[MAP_SIZE][MAP_SIZE], int stage, int* scoreArr) {
                                         // map[3][6]에 2를 대입한다.
 
     while (1) {
-        // DWORD -> unsigned long 	4 byte --> (DWORD)NORMAL --> (4byte)10 ?
         Sleep(1000 / (DWORD)NORMAL);    // snake speed
         if (fruit.numOfFruit == 0) {    // draw fruit
             setFruit(map, &fruit);  // 난수를 발생시켜 맵의 좌표를 무작위로 선택하고 map[?][?]에 들어있는 값이 0이라면
@@ -67,12 +66,12 @@ void GameStart(MData map[MAP_SIZE][MAP_SIZE], int stage, int* scoreArr) {
                 snakeSecond = snake; // snakeSecond에 snake의 좌표를 대입한다. 
                 savedKey = moveSnakeHead(map, &snake, key); // snake가 Wall 또는 Tail과 충돌 시 savedKey에 10을 대입하고
                                                             // 충돌하지 않았을 시 key값을 savedKey에 대입한다.
-                Enqueue(&queue, snakeSecond);   // ?
+                Enqueue(&queue, snakeSecond);
                 setSnakeTail(map, snakeSecond.x, snakeSecond.y);    // 커서를 snakeSecond가 위치한 (x, y) 좌표로 이동하고
                                                                     // ㆁ를 출력한다.
                                                                     // map[snakeSecond.x][snakeSecond.y]에 3을 대입한다.
                 if (time == TRUE) { // time이 TRUE인 경우
-                    snakeTail = Dequeue(&queue);    // ?
+                    snakeTail = Dequeue(&queue);
                     removeSnake(map, snakeTail.x, snakeTail.y); // snakeTail이 위치한 좌표에 공백을 출력한다.
                 }
                 else {  // snake가 fruit와 충돌한 경우 time을 TRUE로 초기화한다.
@@ -89,7 +88,7 @@ void GameStart(MData map[MAP_SIZE][MAP_SIZE], int stage, int* scoreArr) {
             snakeSecond = snake;    // snakeSecond에 snake의 좌표를 대입한다.
             savedKey = moveSnakeHead(map, &snake, savedKey);    // snake가 Wall 또는 Tail과 충돌 시 savedKey에 10을 대입하고
                                                                 // 충돌하지 않았을 시 key값을 savedKey에 대입한다.
-            Enqueue(&queue, snakeSecond);   // ?
+            Enqueue(&queue, snakeSecond);
             setSnakeTail(map, snakeSecond.x, snakeSecond.y);    // 커서를 snakeSecond가 위치한 (x, y) 좌표로 이동하고
                                                                 // ㆁ를 출력한다.
                                                                 // map[snakeSecond.x][snakeSecond.y]에 3을 대입한다.

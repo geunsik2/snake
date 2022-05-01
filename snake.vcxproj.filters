@@ -69,6 +69,12 @@
     <ClCompile Include="queue.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="login_db.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ranking_db.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="a.h">

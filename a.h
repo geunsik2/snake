@@ -62,32 +62,32 @@ SnakePos Peek(Queue* pq);
 
 
 // 함수 원형
-int getKeyDown();
-void gotoxy(int, int);
-void hidecursor(void);
-int drawStartMenu(void);
-int drawSpeedMenu(int*);
-void stageClear(MData map[MAP_SIZE][MAP_SIZE]);
-void stageOneInit(MData map[MAP_SIZE][MAP_SIZE]);
-void stageTwoInit(MData map[MAP_SIZE][MAP_SIZE]);
-void stageThreeInit(MData map[MAP_SIZE][MAP_SIZE]);
-void stageFourinit(MData map[MAP_SIZE][MAP_SIZE]);
-void drawMainMap(MData map[MAP_SIZE][MAP_SIZE]);
-void drawSubMap(int, int, int);
-int setFruit(MData map[MAP_SIZE][MAP_SIZE], FruitPos*);
-int setBonusFruit(MData map[MAP_SIZE][MAP_SIZE], FruitPos*);    // 선언만 하고 호출은 하지 않음.
-void setSnake(MData map[MAP_SIZE][MAP_SIZE], int, int);
-void setSnakeTail(MData map[MAP_SIZE][MAP_SIZE], int, int);
-void removeSnake(MData map[MAP_SIZE][MAP_SIZE], int, int);
+int getKeyDown();           // 키보드가 눌려있을 경우에만 _getch()를 통해 키보드 입력을 받는 함수.
+void gotoxy(int, int);      // 콘솔에서의 커서를 이동하는 함수.
+void hidecursor(void);      // 콘솔창의 커서를 숨기는 함수.
+int drawStartMenu(void);    // 메인화면을 그리는 함수.
+int drawSpeedMenu(int*);    // 맵 선택 메뉴와 점수를 보여주는 함수.
+void stageClear(MData map[MAP_SIZE][MAP_SIZE]);     // map[22][22]을 0으로 초기화하는 함수.
+void stageOneInit(MData map[MAP_SIZE][MAP_SIZE]);   // 첫 번째 맵 -> 맵의 모서리를 1로 초기화하는 함수.
+void stageTwoInit(MData map[MAP_SIZE][MAP_SIZE]);   // 두 번째 맵 -> 맵의 첫 번째 행, 마지막 행, 12번째 열을 1로 초기화하는 함수.
+void stageThreeInit(MData map[MAP_SIZE][MAP_SIZE]); // 세 번째 맵 -> 맵 중앙에 十 모양으로 1을 대입하는 함수.
+void stageFourinit(MData map[MAP_SIZE][MAP_SIZE]);  // 네 번째 맵 -> 중앙이 뚫린 X 모양으로 1을 대입하는 함수.
+void drawMainMap(MData map[MAP_SIZE][MAP_SIZE]);    // 1로 초기화된 좌표에 □를 출력하고 0으로 초기화된 좌표에 공백을 출력하는 함수.
+void drawSubMap(int, int, int);     // 맵을 선택하면 콘솔창 하단에 해당 맵의 점수 및 도움말을 출력하는 함수.                             
+int setFruit(MData map[MAP_SIZE][MAP_SIZE], FruitPos*);         // Fruit 생성 위치 및 모양 설정 함수.
+int setBonusFruit(MData map[MAP_SIZE][MAP_SIZE], FruitPos*);    // Fruit 추가 생성 함수.
+void setSnake(MData map[MAP_SIZE][MAP_SIZE], int, int);         // 뱀 머리 출력하는 함수.
+void setSnakeTail(MData map[MAP_SIZE][MAP_SIZE], int, int);     // 뱀 꼬리 출력하는 함수.
+void removeSnake(MData map[MAP_SIZE][MAP_SIZE], int, int);      // 뱀이 위치한 좌표에 공백을 출력하는 함수.
 int rotate(int, int);
-int isCollision(int);
-int colWithFruit(SnakePos*, FruitPos*);
-int colWithWall(MData map[MAP_SIZE][MAP_SIZE], SnakePos* sp, int);
-int colWithTail(MData map[MAP_SIZE][MAP_SIZE], SnakePos* sp, int);
-int moveSnakeHead(MData map[MAP_SIZE][MAP_SIZE], SnakePos*, int);
-int overlap(int, int);
-void GameOver(int, int, Queue*, int, int*);
-void GameStart(MData map[MAP_SIZE][MAP_SIZE], int, int*);
+int isCollision(int);       // 충돌 여부 검사 함수.
+int colWithFruit(SnakePos*, FruitPos*);     // 뱀이 Fruit와 충돌한 상황 설정 함수.
+int colWithWall(MData map[MAP_SIZE][MAP_SIZE], SnakePos* sp, int);  // 뱀이 Wall과 충돌한 상황 설정 함수.
+int colWithTail(MData map[MAP_SIZE][MAP_SIZE], SnakePos* sp, int);  // 뱀이 Tail과 충돌한 상황 설정 함수.
+int moveSnakeHead(MData map[MAP_SIZE][MAP_SIZE], SnakePos*, int);   // 뱀을 움직이고 충돌 여부를 검사하는 함수.
+int overlap(int, int);      // snake의 방향을 좌->우, 우->좌, 상->하, 하->상 으로 전환하지 못하게 하는 함수.
+void GameOver(int, int, Queue*, int, int*); // GameOver 설정. 최고 점수를 갱신하고 파일을 작성하며 현재 점수를 출력하는 함수.
+void GameStart(MData map[MAP_SIZE][MAP_SIZE], int, int*);   // 게임 시작 함수.
 
 
 // 구조체 포인터 선언하기

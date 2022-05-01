@@ -1,6 +1,6 @@
 #include "a.h"
 
-void GameStart(MData map[MAP_SIZE][MAP_SIZE], int stage, int* scoreArr) {
+void GameStart(MData map[MAP_SIZE][MAP_SIZE], int stage, int* scoreArr) {   // 게임 시작 함수.
     int best = scoreArr[stage - 1]; // best에 현재 선택한 맵의 점수를 대입한다.
     int score = 0;  // score 0으로 초기화.
     int key, savedKey = 0;  // key, savedKey 0으로 초기화.

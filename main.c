@@ -2,33 +2,33 @@
 
 ///////////////////////////QUEUE//////////////////////////////////////////
 
-typedef struct _mynode {
-    SnakePos data;
-    struct _mynode* next;
-} Node;
+typedef struct _mynode {    // typedef로 구조체를 정의
+    SnakePos data;  // snake의 멤버변수 x와 y를 가리킴.
+    struct _mynode* next;   // snake의 다음 x와 y를 가리킴.
+} Node;      // _mynode의 별칭.
 
-typedef struct _myqueue {
-    Node* rear;
-    Node* front;
-} MyQueue;
-typedef MyQueue Queue;
+typedef struct _myqueue {   // typedef로 구조체를 정의 
+    Node* rear;     // Node->data, next ?
+    Node* front;    // Node->next->data, next ?
+} MyQueue;  // _myqueue의 별칭.
+typedef MyQueue Queue;  // MyQueue의 별칭.
 
-void QueueInit(Queue* pq) {
-    pq->rear = NULL;
-    pq->front = NULL;
+void QueueInit(Queue* pq) { // snakePos의 멤버변수 x, y를 NULL로 초기화.
+    pq->rear = NULL;    // pq->rear를 NULL로 초기화.
+    pq->front = NULL;   // pq->front를 NULL로 초기화.
 }
-int isEmpty(Queue* pq) {
+int isEmpty(Queue* pq) {    // 다음으로 생성할 구조체가 NULL인 경우 1을 리턴하고 아닌 경우 0을 리턴한다.
     if (pq->front == NULL)
         return TRUE;
     else
         return FALSE;
 }
-void Enqueue(Queue* pq, SnakePos data) {
-    Node* newNode = (Node*)malloc(sizeof(Node));
-    newNode->data = data;   
-    newNode->next = NULL;
-    if (pq->front == NULL) {
-        pq->rear = newNode;
+void Enqueue(Queue* pq, SnakePos data) {    // ?
+    Node* newNode = (Node*)malloc(sizeof(Node));    // ?
+    newNode->data = data;   // newNode->data에 snake의 멤버변수 x와 y를 대입한다.
+    newNode->next = NULL;   // snake의 다음 x와 y를 NULL로 초기화. 
+    if (pq->front == NULL) {    // pq->front가 NULL인 경우 다음 구조체 생성.?
+        pq->rear = newNode;  
         pq->front = newNode;
     }
     else {
@@ -38,11 +38,11 @@ void Enqueue(Queue* pq, SnakePos data) {
 }
 SnakePos Dequeue(Queue* pq) {
     Node* delNode;
-    SnakePos delData = { 0,0 };
-    if (isEmpty(pq)) {
+    SnakePos delData = { 0,0 }; // 구조체 생성 후 0으로 초기화 ?
+    if (isEmpty(pq)) {  // pq->front == NULL이면 delData를 리턴한다.
         return delData;
     }
-    delNode = pq->front;
+    delNode = pq->front;    
     delData = delNode->data;
     pq->front = pq->front->next;
     free(delNode);
@@ -146,7 +146,7 @@ int colWithWall(MData map[MAP_SIZE][MAP_SIZE], SnakePos* sp, int way) { // snake
 
 //get snake x, y and move snake
 int moveSnakeHead(MData map[MAP_SIZE][MAP_SIZE], SnakePos* snake, int way) {    // snake의 (x,y) 좌표를 구하고 움직인다.
-    removeSnake(map, snake->x, snake->y); // 커서를 (3, 6) 좌표로 이동해서 공백을 출력하고 
+    removeSnake(map, snake->x, snake->y); // 커서를 (snake->x, snake->y) 좌표로 이동해서 공백을 출력하고 
                                           // map[snake_x][snake_y]에 0을 대입한다.
     if (colWithWall(map, snake, way) == TRUE) { // colWithWall의 리턴값이 1인 경우
         gotoxy(1, 1);   // 커서를 (1, 1) 좌표로 이동한다.
@@ -206,7 +206,8 @@ int moveSnakeHead(MData map[MAP_SIZE][MAP_SIZE], SnakePos* snake, int way) {    
     return way; // way를 리턴한다.
 }
 
-int overlap(int savedKey, int key) {
+int overlap(int savedKey, int key) {    // snake의 방향을 좌->우, 우->좌, 상->하, 하->상 으로
+                                        // 전환할 시 1을 리턴한다.
     if (savedKey == UP && key == DOWN)  // savedKey의 값이 72(↑)이고 key의 값이 80(↓)인 경우
         return TRUE;
     if (savedKey == DOWN && key == UP)  // savedKey의 값이 80(↓)이고 key의 값이 72(↑)인 경우
@@ -252,8 +253,9 @@ void GameOver(int score, int best, Queue* pq, int stage, int* scoreArr) {   // G
     printf("\n");
     SetConsoleTextAttribute(hand, 7);   // 콘솔에서의 글자색을 연한 흰색(7)으로 변경한다.
 
-    while (!isEmpty(pq)) {  // 구조체 ?????????
-        Dequeue(pq);
+    while (!isEmpty(pq)) {  // isEmpty(pq)의 리턴값이 0이면 무한루프
+                            // 1이면 반복문을 실행하지 않는다.
+        Dequeue(pq);    
     }
 }
 
@@ -261,13 +263,13 @@ void GameStart(MData map[MAP_SIZE][MAP_SIZE], int stage, int* scoreArr) {
     int best = scoreArr[stage - 1]; // best에 현재 선택한 맵의 점수를 대입한다.
     int score = 0;  // score 0으로 초기화.
     int key, savedKey = 0;  // key, savedKey 0으로 초기화.
-    Queue queue;    // ?
-    QueueInit(&queue);  // ?
+    Queue queue;    // 구조체 생성.
+    QueueInit(&queue);  // rear, front NULL로 초기화.
     SnakePos snake = { MAP_SIZE / 4 - 2, MAP_SIZE / 4 + 1 };    // snake를 (3,6) 좌표에 생성.
-    SnakePos snakeSecond;
-    SnakePos snakeTail;
-    int time = FALSE;
-    FruitPos fruit; 
+    SnakePos snakeSecond;   // 구조체 생성.
+    SnakePos snakeTail; // 구조체 생성.
+    int time = FALSE;   // time을 0으로 초기화.
+    FruitPos fruit; // 구조체 생성.
     fruit.numOfFruit = 0;   // FruitPos의 멤버변수 numOfFruit를 0으로 초기화.
 
     if (stage == 1) {   // 첫 번째 맵 생성.
@@ -288,7 +290,7 @@ void GameStart(MData map[MAP_SIZE][MAP_SIZE], int stage, int* scoreArr) {
                                         // map[3][6]에 2를 대입한다.
 
     while (1) {
-        // DWORD -> unsigned long 	4 byte --> (DWORD)NORMAL --> (4byte)10 ??????????
+        // DWORD -> unsigned long 	4 byte --> (DWORD)NORMAL --> (4byte)10 ?
         Sleep(1000 / (DWORD)NORMAL);    // snake speed
         if (fruit.numOfFruit == 0) {    // draw fruit
             setFruit(map, &fruit);  // 난수를 발생시켜 맵의 좌표를 무작위로 선택하고 map[?][?]에 들어있는 값이 0이라면
@@ -316,13 +318,13 @@ void GameStart(MData map[MAP_SIZE][MAP_SIZE], int stage, int* scoreArr) {
                 gotoxy(DEFAULT_X, DEFAULT_Y);
             }
 
-            if (key == 224 || key == 0) {   
-                key = _getch();
-                if (overlap(savedKey, key) == TRUE) {
-                    key = savedKey;
+            if (key == 224) {   // 방향키(↑, ↓, ←, →) 입력을 받은 경우.
+                key = _getch(); // key에 사용자의 키보드 입력을 대입한다. 
+                if (overlap(savedKey, key) == TRUE) {   // 좌->우, 우->좌, 상->하, 하->상 으로 방향 전환 시도 시
+                    key = savedKey; // key에 savedKey를 대입한다.
                 }
-                snakeSecond = snake;
-                savedKey = moveSnakeHead(map, &snake, key);
+                snakeSecond = snake; // snakeSecond에 snake의 좌표를 대입한다. 
+                savedKey = moveSnakeHead(map, &snake, key); 
                 Enqueue(&queue, snakeSecond);
                 setSnakeTail(map, snakeSecond.x, snakeSecond.y);
                 if (time == TRUE) {

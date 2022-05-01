@@ -29,16 +29,17 @@
 
 typedef int MData;		// 자료형 int를 MData로 정의.
 
-typedef struct _fruitxy {       // typedef로 구조체를 정의하면서 별칭을 지정
+typedef struct _fruitxy {       // typedef로 구조체를 정의
     int x;                      // _fruitxy의 멤버변수
     int y;
     int numOfFruit;
 } FruitPos;                     // _fruitxy의 별칭.
 
-typedef struct _snakexy {       // typedef로 구조체를 정의하면서 별칭을 지정
+typedef struct _snakexy {       // typedef로 구조체를 정의
     int x;                      // _snakexy의 멤버변수
     int y;
 } SnakePos;                     // _snakexy의 별칭.
+
 
 // 함수 원형
 int getKeyDown();

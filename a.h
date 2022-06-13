@@ -98,11 +98,8 @@ int moveSnakeHead(MData map[MAP_SIZE][MAP_SIZE], SnakePos*, int);   // 뱀을 움직
 int overlap(int, int);      // snake의 방향을 좌->우, 우->좌, 상->하, 하->상 으로 전환하지 못하게 하는 함수.
 void GameOver(int, int, Queue*, int, int*); // GameOver 설정. 최고 점수를 갱신하고 파일을 작성하며 현재 점수를 출력하는 함수.
 void GameStart(MData map[MAP_SIZE][MAP_SIZE], int, int*);   // 게임 시작 함수.
-<<<<<<< HEAD
 int login_db(void);     // 회원가입과 로그인 처리를 하는 함수.
 int ranking_db(int, int, int, int[]);   // 유저의 점수 정보를 ranking 테이블에 입력하는 함수.
-=======
->>>>>>> 8455f4792b37076870f2008e3557fc8c63d3f89f
 
 
 // 구조체 포인터 선언하기
